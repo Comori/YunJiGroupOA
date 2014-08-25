@@ -11,8 +11,8 @@
     
     <color name="home_notice_pressed">#27A5BC</color>
     <color name="home_mail_pressed">#0A89F0</color>
-    <color name="home_meetting_pressed">#E53698</color>
-    <color name="home_schedule_pressed">#F7520A</color>
+    <color name="home_meetting_pressed">#E30F83</color>
+    <color name="home_schedule_pressed">#DB4808</color>
     <color name="home_contact_pressed">#2E5DE5</color>
-    <color name="home_setting_pressed">#21B91F</color>
+    <color name="home_setting_pressed">#05B203</color>
 </resources>
