@@ -67,7 +67,9 @@ public class NetEngine {
         
         Response response = post(Request.Login.URL, Request.Login.createRequest(name, passwd));
         User user = null;
-        
+        if(response == null){
+        	return null;
+        }
         if(response.statusCode == HttpStatus.SC_OK){
             if(!TextUtils.isEmpty(response.content)){
                 try {

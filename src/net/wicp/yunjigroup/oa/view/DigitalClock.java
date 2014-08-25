@@ -14,7 +14,7 @@ import android.util.AttributeSet;
 
 /**
  * 自定义DigitalClock输出格式
- * @author 农民伯伯
+ * @author chenqiang
  *
  */
 public class DigitalClock extends android.widget.DigitalClock {

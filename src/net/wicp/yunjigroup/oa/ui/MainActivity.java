@@ -5,23 +5,24 @@ import net.wicp.yunjigroup.oa.models.User;
 import net.wicp.yunjigroup.oa.net.NetEngine;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.Window;
+import android.widget.TextView;
 
 public class MainActivity extends BaseActivity {
 
+	private TextView nameTx = null;
+	private TextView jobTx  = null;
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.home);
-//        findViewById(R.id.btn).setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick( View arg0 ) {
-//                new LoginTask().execute();
-//            }
-//        });
+        nameTx = (TextView) findViewById(R.id.user_name);
+        jobTx = (TextView) findViewById(R.id.user_job);
         
+        new LoginTask().execute();
     }
 
     @Override
@@ -36,7 +37,7 @@ public class MainActivity extends BaseActivity {
         @Override
         protected User doInBackground( Void... arg0 ) {
             
-            User user = NetEngine.login("huangping", "123hh4");
+            User user = NetEngine.login("huangping", "1234");
             
             return user;
         }
@@ -44,6 +45,10 @@ public class MainActivity extends BaseActivity {
         @Override
         protected void onPostExecute( User result ) {
             super.onPostExecute(result);
+            if(result != null && (TextUtils.isEmpty(result.getError()) || result.getError().equalsIgnoreCase("null"))){
+            	nameTx.setText(result.getName());
+            	jobTx.setText(result.getDuty());
+            }
         }
         
     }
