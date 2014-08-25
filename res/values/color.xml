@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="sky_blue">#00BFFF</color>
+    <color name="home_light_blue">#2BB8D1</color>
+    <color name="home_dark_blue">#2D99EC</color>
+    <color name="home_red">#E14DA0</color>
+    <color name="home_orange">#F56424</color>
+    <color name="home_purple">#426DE7</color>
+    <color name="home_green">#44BA41</color>
+    <color name="white">#FFFFFF</color>
+    
+    <color name="home_notice_pressed">#27A5BC</color>
+    <color name="home_mail_pressed">#0A89F0</color>
+    <color name="home_meetting_pressed">#E53698</color>
+    <color name="home_schedule_pressed">#F7520A</color>
+    <color name="home_contact_pressed">#2E5DE5</color>
+    <color name="home_setting_pressed">#21B91F</color>
+</resources>
