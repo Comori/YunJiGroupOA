@@ -49,6 +49,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
         protected void onPostExecute( User result ) {
             super.onPostExecute(result);
             dialog.dismiss();
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            intent.putExtra(Contants.SP_USER, result);
+            startActivity(intent);
+            finish();
             if(result != null && (TextUtils.isEmpty(result.getError()) || result.getError().equalsIgnoreCase("null"))){
                 Toast.makeText(LoginActivity.this, R.string.login_success, Toast.LENGTH_SHORT).show();
                 Utils.setLoginState(LoginActivity.this, true);
@@ -57,10 +61,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                intent.putExtra(Contants.SP_USER, result);
-                startActivity(intent);
-                finish();
             }else{
                 if(result != null && !TextUtils.isEmpty(result.getError()) && !"null".equalsIgnoreCase(result.getError())){
                     Toast.makeText(LoginActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
