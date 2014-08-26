@@ -53,8 +53,10 @@ public class HomeActivity extends BaseActivity {
     public void initViews() {
         nameTx = (TextView) findViewById(R.id.user_name);
         jobTx = (TextView) findViewById(R.id.user_job);
-        nameTx.setText(mUser.getName());
-        jobTx.setText(mUser.getDuty());
+        if(mUser != null){
+            nameTx.setText(mUser.getName());
+            jobTx.setText(mUser.getDuty());
+        }
     }
 
 }
