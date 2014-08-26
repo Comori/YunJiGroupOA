@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     >
+
+    <EditText
+        android:id="@+id/login_passwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:singleLine="true"
+		android:layout_marginLeft="40dp"
+		android:layout_marginRight="40dp"
+		android:padding="10dp"
+		android:layout_centerInParent="true"
+		android:layout_marginTop="10dp"
+		android:hint="密码"
+        android:inputType="textPassword" >
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/login_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:padding="10dp"
+        android:hint="员工号或用户名"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_above="@id/login_passwd"
+        android:inputType="textPersonName" >
+        <requestFocus />
+        </EditText>
+    
+    <ImageView 
+        android:id="@+id/login_o"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/o"
+        android:layout_above="@id/login_name"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        />
+	<ImageView 
+        android:id="@+id/login_a"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/a"
+        android:layout_alignTop="@id/login_o"
+        android:layout_toRightOf="@id/login_o"
+        android:layout_marginLeft="-20dp"
+        />
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="移动办公"
+	    android:textSize="35sp"
+	    android:layout_toRightOf="@id/login_a"
+	    android:layout_alignTop="@id/login_a"
+	    android:paddingTop="15dp"
+	    />
+	<LinearLayout 
+	    android:id="@+id/login_layout"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:background="@color/smoke_white"
+	    android:layout_alignParentBottom="true"
+	    >
+	    <Button 
+	        android:id="@+id/login_cancel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:text="取消"
+	        android:background="@drawable/login_cancel_btn_selector"
+	        android:layout_margin="5dp"
+	        />
+	    <Button 
+	        android:id="@+id/login_sure"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:text="登陆"
+	        android:background="@drawable/login_sure_btn_selector"
+	        android:layout_margin="5dp"
+	        />
+	</LinearLayout>
+	
+	<View 
+	    android:layout_width="match_parent"
+	    android:layout_height="0.3dp"
+	    android:background="#AAAAAA"
+	    android:layout_above="@id/login_layout"
+	    />
+	
+</RelativeLayout>

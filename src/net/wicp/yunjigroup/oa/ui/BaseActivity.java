@@ -4,13 +4,15 @@ import net.wicp.yunjigroup.oa.utils.ActivitesStack;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class BaseActivity extends Activity{
+public abstract class BaseActivity extends Activity{
     
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         ActivitesStack.getInstance().push(this);
     }
+    
+    public abstract void initViews();
     
     @Override
     protected void onResume() {

@@ -8,6 +8,9 @@
     <color name="home_purple">#426DE7</color>
     <color name="home_green">#44BA41</color>
     <color name="white">#FFFFFF</color>
+    <color name="smoke_white">#F0F0F0</color>
+    <color name="light_gray">#CCCCCC</color>
+    <color name="dark_gray">#AAAAAA</color>
     
     <color name="home_notice_pressed">#27A5BC</color>
     <color name="home_mail_pressed">#0A89F0</color>

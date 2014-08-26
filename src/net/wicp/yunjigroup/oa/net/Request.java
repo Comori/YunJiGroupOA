@@ -1,14 +1,15 @@
 package net.wicp.yunjigroup.oa.net;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
 import net.wicp.yunjigroup.oa.utils.Utils;
-import android.util.Base64;
-
+/**
+ * 请求类，包含所有接口请求
+ * @author chenqiang5
+ *
+ */
 public class Request implements Serializable{
 
     private static final long serialVersionUID = 126485236L;
@@ -25,6 +26,11 @@ public class Request implements Serializable{
         return map;
     }
     
+    /**
+     * 登陆请求
+     * @author chenqiang5
+     *
+     */
     public static class Login{
         
         private static final String KEY_NAME = "xingming";
@@ -36,6 +42,26 @@ public class Request implements Serializable{
             Map<String, Object> params = buildBaseRequest();
             params.put(KEY_NAME, name);
             params.put(KEY_PASSWD, passwd);
+            String request = Utils.mapToJsonStr(params);
+            return Utils.encrypt(request);
+        }
+        
+    }
+    
+    /**
+     * 首页请求
+     * @author chenqiang5
+     *
+     */
+    public static class HomeList{
+        
+        private static final String KEY_TOKEN = "token";
+        
+        public static final String URL = HOST + "/app/index.php";
+        
+        public static String createRequest(String token){
+            Map<String, Object> params = buildBaseRequest();
+            params.put(KEY_TOKEN, token);
             String request = Utils.mapToJsonStr(params);
             return Utils.encrypt(request);
         }
