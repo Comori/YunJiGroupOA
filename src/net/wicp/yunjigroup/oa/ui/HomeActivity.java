@@ -4,20 +4,52 @@ import java.io.IOException;
 import java.io.StreamCorruptedException;
 
 import net.wicp.yunjigroup.oa.R;
+import net.wicp.yunjigroup.oa.models.HomeData;
 import net.wicp.yunjigroup.oa.models.User;
+import net.wicp.yunjigroup.oa.net.NetEngine;
 import net.wicp.yunjigroup.oa.utils.Contants;
 import net.wicp.yunjigroup.oa.utils.Utils;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class HomeActivity extends BaseActivity {
+public class HomeActivity extends BaseActivity implements OnClickListener {
 
 	private TextView nameTx = null;
 	private TextView jobTx  = null;
 	private User mUser = null;
+	private TextView noticeTx,mailTx,meetingTx,workFlowTx,contactTx;
+	private RelativeLayout contactLayout;
+	
+	class GetHomeDataTask extends AsyncTask<String, Void, HomeData>{
+	    
+	    @Override
+	    protected void onPreExecute() {
+	        super.onPreExecute();
+	    }
+
+        @Override
+        protected HomeData doInBackground( String... arg0 ) {
+            
+            return NetEngine.getHomeData(arg0[0]);
+        }
+        
+        @Override
+        protected void onPostExecute( HomeData result ) {
+            super.onPostExecute(result);
+            updateHomeData(result);
+        }
+	    
+	}
+	
+	
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
@@ -40,6 +72,8 @@ public class HomeActivity extends BaseActivity {
         }
         
         initViews();
+        
+        new GetHomeDataTask().execute(mUser.getToken());
     }
 
     @Override
@@ -57,6 +91,37 @@ public class HomeActivity extends BaseActivity {
             nameTx.setText(mUser.getName());
             jobTx.setText(mUser.getDuty());
         }
+        noticeTx = (TextView) findViewById(R.id.home_notice_unread);
+        mailTx = (TextView) findViewById(R.id.home_mail_unread);
+        meetingTx = (TextView) findViewById(R.id.home_meetting_unread);
+        workFlowTx = (TextView) findViewById(R.id.home_schedule_unread);
+        contactTx = (TextView) findViewById(R.id.home_contact_unread);
+        contactLayout = (RelativeLayout) findViewById(R.id.home_contact);
+        contactLayout.setOnClickListener(this);
+    }
+    
+    private void updateHomeData(HomeData homeData){
+        if(homeData == null){
+            Toast.makeText(this, " ˝æ›º”‘ÿ ß∞‹£¨«Î÷ÿ ‘£°", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String unRead = "Œ¥∂¡";
+        noticeTx.setText(homeData.getNoticeCount()+unRead);
+        mailTx.setText(homeData.getMessageCount()+unRead);
+        meetingTx.setText(homeData.getMeetingCount()+unRead);
+        workFlowTx.setText(homeData.getWorkflowCount()+unRead);
+        contactTx.setText(homeData.getAddressCount()+unRead);
+        
+    }
+
+    @Override
+    public void onClick( View v ) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                NetEngine.getAddressListUser(mUser.getToken(), "", "");
+            }
+        }).start();
     }
 
 }

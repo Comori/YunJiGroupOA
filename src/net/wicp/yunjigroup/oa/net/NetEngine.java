@@ -4,9 +4,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-
+import net.wicp.yunjigroup.oa.models.HomeData;
 import net.wicp.yunjigroup.oa.models.User;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
@@ -28,7 +27,7 @@ public class NetEngine {
     public static final int REQUEST_TIME_OUT = 20 * 1000 ;
     
     /**
-     * 
+     * post 请求
      * @param url
      * @param request
      * @return
@@ -58,7 +57,7 @@ public class NetEngine {
     }
     
     /**
-     * 
+     * 登陆
      * @param name
      * @param passwd
      * @return
@@ -83,5 +82,41 @@ public class NetEngine {
         
         return user;
     }
+    
+    /**
+     * 首页数据
+     * @param token
+     * @return
+     */
+    public static HomeData getHomeData(String token){
+        Response response = post(Request.HomeList.URL, Request.HomeList.createRequest(token));
+        HomeData homeData = null;
+        if(response == null){
+            return null;
+        }
+        if(response.statusCode == HttpStatus.SC_OK){
+            if(!TextUtils.isEmpty(response.content)){
+                try {
+                    JSONObject jsonObject = new JSONObject(response.content);
+                    homeData = HomeData.fromJson(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return homeData;
+    }
+    
+    public static void getAddressList(String token){
+        Response response = post(Request.AddressList.URL, Request.AddressList.createRequest(token));
+        String s = null;
+    }
+    
+    public static void getAddressListUser(String token,String department,String name){
+        Response response = post(Request.AddressListUser.URL, Request.AddressListUser.createRequest(token,"集团领导",""));
+        String s = null;
+    }
+    
+    
 
 }

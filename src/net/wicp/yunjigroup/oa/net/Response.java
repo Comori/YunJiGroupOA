@@ -28,9 +28,7 @@ public class Response implements Serializable{
             try {
                 String re = EntityUtils.toString(entity, "UTF-8");
                 response.content = Utils.decrypt(re);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
