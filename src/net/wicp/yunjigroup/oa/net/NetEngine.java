@@ -117,6 +117,11 @@ public class NetEngine {
         String s = null;
     }
     
+    public static void getAddressDetail(String token,String id,String name){
+        Response response = post(Request.AddressDetail.URL, Request.AddressDetail.createRequest(token,"5330","»ÆÆ½"));
+        String s = null;
+    }
+    
     
 
 }

@@ -54,26 +54,26 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.home);
+        setContentView(R.layout.address_group);
         
         Intent intent = getIntent();
-        if(intent.getSerializableExtra(Contants.SP_USER) != null){
-            mUser = (User) intent.getSerializableExtra(Contants.SP_USER);
-        }else{
-            try {
-                mUser = (User) Utils.getObjFromSP(this, Contants.SP_USER);
-            } catch (StreamCorruptedException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        
-        initViews();
-        
-        new GetHomeDataTask().execute(mUser.getToken());
+//        if(intent.getSerializableExtra(Contants.SP_USER) != null){
+//            mUser = (User) intent.getSerializableExtra(Contants.SP_USER);
+//        }else{
+//            try {
+//                mUser = (User) Utils.getObjFromSP(this, Contants.SP_USER);
+//            } catch (StreamCorruptedException e) {
+//                e.printStackTrace();
+//            } catch (ClassNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        
+//        initViews();
+//        
+//        new GetHomeDataTask().execute(mUser.getToken());
     }
 
     @Override
@@ -119,7 +119,7 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                NetEngine.getAddressListUser(mUser.getToken(), "", "");
+                NetEngine.getAddressDetail(mUser.getToken(), "", "");
             }
         }).start();
     }

@@ -110,5 +110,28 @@ public class Request implements Serializable{
         }
         
     }
+    /**
+     * 联系人详情
+     * @author chenqiang5
+     *
+     */
+    public static class AddressDetail{
+        
+        private static final String KEY_TOKEN = "token";
+        private static final String KEY_ID = "id";
+        private static final String KEY_NAME = "xingming";
+        
+        public static final String URL = HOST + "/app/address/addressdetail.php";
+        
+        public static String createRequest(String token,String id,String name){
+            Map<String, Object> params = buildBaseRequest();
+            params.put(KEY_TOKEN, token);
+            params.put(KEY_ID, id);
+            params.put(KEY_NAME, name);
+            String request = Utils.mapToJsonStr(params);
+            return Utils.encrypt(request);
+        }
+        
+    }
 
 }
