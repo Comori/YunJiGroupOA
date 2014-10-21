@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.text.TextUtils;
 import net.wicp.yunjigroup.oa.utils.Utils;
 /**
  * 请求类，包含所有接口请求
@@ -19,6 +20,7 @@ public class Request implements Serializable{
     public static final String KEY_ROUND_STR = "dd7576aecadd630b6a329799736b2b25";
     public static final String VALUE_ROUND_STR = "roundstr";
     public static final String KEY_REQUEST = "request";
+    private static final String KEY_TOKEN = "token";
     
     public static Map<String, Object> buildBaseRequest(){
         Map<String, Object> map = new HashMap<String, Object>();
@@ -55,8 +57,6 @@ public class Request implements Serializable{
      */
     public static class HomeList{
         
-        private static final String KEY_TOKEN = "token";
-        
         public static final String URL = HOST + "/app/index.php";
         
         public static String createRequest(String token){
@@ -73,8 +73,6 @@ public class Request implements Serializable{
      *
      */
     public static class AddressList{
-        
-        private static final String KEY_TOKEN = "token";
         
         public static final String URL = HOST + "/app/address/addresslist.php";
         
@@ -94,7 +92,6 @@ public class Request implements Serializable{
      */
     public static class AddressListUser{
         
-        private static final String KEY_TOKEN = "token";
         private static final String KEY_DEPARTMENT = "department";
         private static final String KEY_NAME = "xingming";
         
@@ -117,7 +114,6 @@ public class Request implements Serializable{
      */
     public static class AddressDetail{
         
-        private static final String KEY_TOKEN = "token";
         private static final String KEY_ID = "id";
         private static final String KEY_NAME = "xingming";
         
@@ -128,6 +124,48 @@ public class Request implements Serializable{
             params.put(KEY_TOKEN, token);
             params.put(KEY_ID, id);
             params.put(KEY_NAME, name);
+            String request = Utils.mapToJsonStr(params);
+            return Utils.encrypt(request);
+        }
+        
+    }
+    
+    /**
+     * 会议列表
+     * @author chenqiang
+     * @2014年10月21日
+     * @TODO
+     */
+    public static class MeetingList{
+        
+        public static final String URL = HOST + "/app/meeting/meetinglist.php";
+        
+        public static String createRequest(String token){
+            Map<String, Object> params = buildBaseRequest();
+            params.put(KEY_TOKEN, token);
+            String request = Utils.mapToJsonStr(params);
+            return Utils.encrypt(request);
+        }
+    }
+    
+    /**
+     * 设置：反馈意见
+     * @author chenqiang
+     * @2014年10月21日
+     * @TODO
+     */
+    public static class Setting{
+        
+        public static final String URL = HOST + "app/setup/suggestion.php";
+        
+        public static final String KEY_FEEDBACK_CONTENT = "content";
+        public static final String KEY_MOBILE = "mobile";
+        
+        public static String createRequest(String token,String content,String mobile){
+            Map<String, Object> params = buildBaseRequest();
+            params.put(KEY_TOKEN, token);
+            params.put(KEY_FEEDBACK_CONTENT, content);
+            if(!TextUtils.isEmpty(mobile)) params.put(KEY_MOBILE, mobile);
             String request = Utils.mapToJsonStr(params);
             return Utils.encrypt(request);
         }

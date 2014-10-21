@@ -10,13 +10,12 @@
 	<include 
 	    layout="@layout/searchview"
 	    />
-
-	<ListView 
-	    android:id="@+id/addresslist"
+	
+	<FrameLayout 
+	    android:id="@+id/container"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
-	    android:padding="10dp"
 	    >
-	    
-	</ListView>
+	</FrameLayout>
+
 </LinearLayout>

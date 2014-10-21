@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,7 +37,7 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
         @Override
         protected HomeData doInBackground( String... arg0 ) {
             
-            return NetEngine.getHomeData(arg0[0]);
+            return NetEngine.getInstance(mContext).getHomeData(arg0[0]);
         }
         
         @Override
@@ -53,27 +52,26 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.address_group);
+        setContentView(R.layout.home);
         
         Intent intent = getIntent();
-//        if(intent.getSerializableExtra(Contants.SP_USER) != null){
-//            mUser = (User) intent.getSerializableExtra(Contants.SP_USER);
-//        }else{
-//            try {
-//                mUser = (User) Utils.getObjFromSP(this, Contants.SP_USER);
-//            } catch (StreamCorruptedException e) {
-//                e.printStackTrace();
-//            } catch (ClassNotFoundException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        
-//        initViews();
-//        
-//        new GetHomeDataTask().execute(mUser.getToken());
+        if(intent.getSerializableExtra(Contants.SP_USER) != null){
+            mUser = (User) intent.getSerializableExtra(Contants.SP_USER);
+        }else{
+            try {
+                mUser = (User) Utils.getObjFromSP(this, Contants.SP_USER);
+            } catch (StreamCorruptedException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        initViews();
+        
+        new GetHomeDataTask().execute(mUser.getToken());
     }
 
     @Override
@@ -98,6 +96,8 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
         contactTx = (TextView) findViewById(R.id.home_contact_unread);
         contactLayout = (RelativeLayout) findViewById(R.id.home_contact);
         contactLayout.setOnClickListener(this);
+        findViewById(R.id.home_notice).setOnClickListener(this);
+        findViewById(R.id.home_setting).setOnClickListener(this);
     }
     
     private void updateHomeData(HomeData homeData){
@@ -116,12 +116,25 @@ public class HomeActivity extends BaseActivity implements OnClickListener {
 
     @Override
     public void onClick( View v ) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                NetEngine.getAddressDetail(mUser.getToken(), "", "");
-            }
-        }).start();
+        switch (v.getId()) {
+        case R.id.home_notice:
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    NetEngine.getInstance(mContext).getAddressListUser(mUser.getToken(), "", "");
+                }
+            }).start();
+            break;
+        case R.id.home_contact:
+            Intent intent = new Intent(this,ContactActivity.class);
+            intent.putExtra("token", mUser.getToken());
+            startActivity(intent);
+            break;
+        case R.id.home_setting:
+            startActivity(new Intent(this, SettingActivity.class));
+            break;
+        default:
+            break;
+        }
     }
-
 }

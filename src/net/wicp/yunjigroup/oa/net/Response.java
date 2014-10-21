@@ -1,13 +1,11 @@
 package net.wicp.yunjigroup.oa.net;
 
-import java.io.IOException;
 import java.io.Serializable;
 
 import net.wicp.yunjigroup.oa.utils.Utils;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.ParseException;
 import org.apache.http.util.EntityUtils;
 
 

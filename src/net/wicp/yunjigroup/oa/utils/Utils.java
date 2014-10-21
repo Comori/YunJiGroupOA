@@ -7,8 +7,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -18,6 +16,7 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -45,12 +44,8 @@ public class Utils {
     public static String encrypt( String str ) {
         String result = null;
         if (!TextUtils.isEmpty(str)) {
-            try {
-                result = URLEncoder.encode(str, "UTF-8");
-                result = Base64.encodeToString(result.getBytes(), Base64.DEFAULT);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+            result = Uri.encode(str);
+            result = Base64.encodeToString(result.getBytes(), Base64.DEFAULT);
         }
         return result;
     }
@@ -60,7 +55,7 @@ public class Utils {
         if (!TextUtils.isEmpty(str)) {
             try {
                 result = new String(Base64.decode(str, Base64.DEFAULT), "UTF-8");
-                result = URLDecoder.decode(result, "UTF-8");
+                result = Uri.decode(result);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }

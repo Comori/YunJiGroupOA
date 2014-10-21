@@ -1,11 +1,17 @@
 package net.wicp.yunjigroup.oa.net;
 
 import java.io.IOException;
+import java.io.StreamCorruptedException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.wicp.yunjigroup.oa.models.AddressGroup;
 import net.wicp.yunjigroup.oa.models.HomeData;
 import net.wicp.yunjigroup.oa.models.User;
+import net.wicp.yunjigroup.oa.utils.Contants;
+import net.wicp.yunjigroup.oa.utils.Utils;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
@@ -21,18 +27,56 @@ import org.apache.http.params.HttpParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.text.TextUtils;
 
 public class NetEngine {
     public static final int REQUEST_TIME_OUT = 20 * 1000 ;
     
+    public static NetEngine engine = null;
+    
+    public static String token = null;
+    
+    private NetEngine(){}
+    
+    public static NetEngine getInstance(Context context){
+        if(engine == null){
+            engine = new NetEngine();
+        }
+        if(TextUtils.isEmpty(token)){
+            initToken(context);
+        }
+        return engine;
+    }
+    
+    
+    private static void initToken(Context context) {
+        User user = null;
+        try {
+            user = (User) Utils.getObjFromSP(context, Contants.SP_USER);
+        } catch (StreamCorruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        if(user != null){
+            token = user.getToken();
+        }
+        
+    }
+
     /**
      * post 请求
      * @param url
      * @param request
      * @return
      */
-    public static Response post(String url,String request){
+    public  Response post(String url,String request){
         HttpPost post = new HttpPost(url);
         HttpParams httpParams = new BasicHttpParams();
         HttpResponse response = null;
@@ -53,6 +97,7 @@ public class NetEngine {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("request--->"+request);
         return Response.bulid(response);
     }
     
@@ -62,7 +107,7 @@ public class NetEngine {
      * @param passwd
      * @return
      */
-    public static User login(String name,String passwd){
+    public  User login(String name,String passwd){
         
         Response response = post(Request.Login.URL, Request.Login.createRequest(name, passwd));
         User user = null;
@@ -70,7 +115,7 @@ public class NetEngine {
         	return null;
         }
         if(response.statusCode == HttpStatus.SC_OK){
-            if(!TextUtils.isEmpty(response.content)){
+            if(!TextUtils.isEmpty(response.content)){   
                 try {
                     JSONObject jsonObject = new JSONObject(response.content);
                     user = User.fromJson(jsonObject);
@@ -88,7 +133,7 @@ public class NetEngine {
      * @param token
      * @return
      */
-    public static HomeData getHomeData(String token){
+    public  HomeData getHomeData(String token){
         Response response = post(Request.HomeList.URL, Request.HomeList.createRequest(token));
         HomeData homeData = null;
         if(response == null){
@@ -107,21 +152,36 @@ public class NetEngine {
         return homeData;
     }
     
-    public static void getAddressList(String token){
+    public  List<AddressGroup> getAddressList(String token){
         Response response = post(Request.AddressList.URL, Request.AddressList.createRequest(token));
+        if(response == null) return null;
+        List<AddressGroup> addressGroups = null;
+        if(response.statusCode == HttpStatus.SC_OK){
+            if(!TextUtils.isEmpty(response.content)){
+                try {
+                    JSONObject jsonObject = new JSONObject(response.content);
+                    addressGroups = AddressGroup.fromJsons(jsonObject);
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        return addressGroups;
+    }
+    
+    public  void getAddressListUser(String token,String department,String name){
+        Response response = post(Request.AddressListUser.URL, Request.AddressListUser.createRequest(token,"集团领导","黄平"));
         String s = null;
     }
     
-    public static void getAddressListUser(String token,String department,String name){
-        Response response = post(Request.AddressListUser.URL, Request.AddressListUser.createRequest(token,"集团领导",""));
-        String s = null;
-    }
-    
-    public static void getAddressDetail(String token,String id,String name){
+    public  void getAddressDetail(String token,String id,String name){
         Response response = post(Request.AddressDetail.URL, Request.AddressDetail.createRequest(token,"5330","黄平"));
         String s = null;
     }
     
-    
+    public  void sendFeedback(String token,String a ){
+        
+    }
 
 }
