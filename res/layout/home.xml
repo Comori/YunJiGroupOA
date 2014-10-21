@@ -1,225 +1,320 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="7"
+        android:background="@color/sky_blue" >
+        
+        <net.wicp.yunjigroup.oa.view.DigitalClock
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="60sp"
+            android:layout_alignParentRight="true"
+            android:padding="15dp"
+            />
+        <TextView 
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_alignParentBottom="true"
+            android:padding="8dp"
+            android:text="李明明"
+            android:textColor="@color/white"
+            />
+        <TextView 
+            android:id="@+id/user_job"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/user_name"
+            android:padding="8dp"
+            android:text="行政部"
+            android:textColor="@color/white"
+            />
+        
+        <ImageView 
+            android:id="@+id/o"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/o"
+            android:layout_above="@id/user_name"
+            android:layout_marginLeft="3dp"
+            />
+        <ImageView 
+            android:id="@+id/a"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/a"
+            android:layout_above="@id/user_name"
+            android:layout_toRightOf="@id/o"
+            android:layout_marginLeft="-10dp"
+            />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="移动办公"
+            android:layout_above="@id/user_job"
+            android:layout_toRightOf="@id/a"
+            android:textSize="25sp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/white"
+            />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/black"
-        android:orientation="vertical" >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:background="@drawable/oa_bj" >
-
-            <net.wicp.yunjigroup.oa.view.DigitalClock
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:padding="15dp"
-                android:textColor="@color/white"
-                android:textSize="60sp" />
-
-            <TextView
-                android:id="@+id/user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:padding="10dp"
-                android:text="李明明"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/user_job"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_toRightOf="@id/user_name"
-                android:padding="10dp"
-                android:text="行政部"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/user_name"
-                android:layout_gravity="bottom"
-                android:layout_margin="10dp"
-                android:src="@drawable/oa_logo" />
-        </RelativeLayout>
+        android:layout_weight="3"
+        android:baselineAligned="true"
+        android:orientation="horizontal"
+        android:paddingBottom="2dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:baselineAligned="true"
-            android:orientation="horizontal"
-            android:paddingBottom="2dp"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp" >
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
 
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/home_notice"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="2dp"
-                android:layout_weight="1"
-                android:orientation="vertical" >
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:clickable="true"
+                android:background="@drawable/home_notice_selector" >
 
-                <RelativeLayout
-                    android:id="@+id/home_notice"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/notice_bg"
-                    android:clickable="true" >
+                    android:orientation="horizontal" >
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        android:src="@drawable/notice" />
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:paddingLeft="5dp"
+                        android:src="@drawable/home_notice" />
 
                     <TextView
-                        android:id="@+id/home_notice_unread"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:padding="10dp"
-                        android:text="3未读"
-                        android:textColor="@color/white"
-                        android:textSize="20sp" />
-                </RelativeLayout>
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="@string/home_notice" />
+                </LinearLayout>
 
-                <RelativeLayout
-                    android:id="@+id/home_meeting"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/home_notice_unread"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:background="@drawable/metting_bg"
-                    android:clickable="true" >
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:padding="5dp"
+                    android:text="3未读"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </RelativeLayout>
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        android:src="@drawable/meetting" />
-
-                    <TextView
-                        android:id="@+id/home_meetting_unread"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:padding="10dp"
-                        android:text="3未读"
-                        android:textColor="@color/white"
-                        android:textSize="20sp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/home_contact"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:background="@drawable/contact_bg"
-                    android:clickable="true" >
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        android:src="@drawable/contact" />
-
-                    <TextView
-                        android:id="@+id/home_contact_unread"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:padding="10dp"
-                        android:text="1024人"
-                        android:textColor="@color/white"
-                        android:textSize="20sp" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/home_meeting"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical" >
+                android:layout_height="match_parent"
+                android:layout_marginTop="2dp"
+                android:layout_weight="6"
+                android:clickable="true"
+                android:background="@drawable/home_meetting_selector" >
 
-                <RelativeLayout
-                    android:id="@+id/home_mail"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/mail_bg"
-                    android:clickable="true" >
+                    android:orientation="horizontal" >
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        android:src="@drawable/mail" />
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:paddingLeft="5dp"
+                        android:src="@drawable/home_meeting" />
 
                     <TextView
-                        android:id="@+id/home_mail_unread"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:padding="10dp"
-                        android:text="5未读"
-                        android:textColor="@color/white"
-                        android:textSize="20sp" />
-                </RelativeLayout>
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="@string/home_meetting" />
+                </LinearLayout>
 
-                <RelativeLayout
-                    android:id="@+id/home_schedule"
+                <TextView
+                    android:id="@+id/home_meetting_unread"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:padding="5dp"
+                    android:text="3未读"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/home_contact"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="2dp"
+                android:layout_weight="6"
+                android:clickable="true"
+                android:background="@drawable/home_contact_selector" >
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:background="@drawable/schedule_bg"
-                    android:clickable="true" >
+                    android:orientation="horizontal" >
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        android:src="@drawable/schedule" />
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:paddingLeft="5dp"
+                        android:src="@drawable/home_contact" />
 
                     <TextView
-                        android:id="@+id/home_schedule_unread"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:padding="10dp"
-                        android:text="3未读"
-                        android:textColor="@color/white"
-                        android:textSize="20sp" />
-                </RelativeLayout>
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="@string/home_contact" />
+                </LinearLayout>
 
-                <RelativeLayout
-                    android:id="@+id/home_setting"
+                <TextView
+                    android:id="@+id/home_contact_unread"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:padding="5dp"
+                    android:text="1024人"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/home_mail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:clickable="true"
+                android:background="@drawable/home_mail_selector" >
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:background="@drawable/setting_bg"
-                    android:clickable="true" >
+                    android:orientation="horizontal" >
 
                     <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:paddingLeft="5dp"
+                        android:src="@drawable/home_mail" />
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_margin="20dp"
-                        android:src="@drawable/setting" />
-                </RelativeLayout>
-            </LinearLayout>
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="@string/home_mail" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/home_mail_unread"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:padding="5dp"
+                    android:text="5未读"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/home_schedule"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="2dp"
+                android:layout_weight="5"
+                android:clickable="true"
+                android:background="@drawable/home_schedule_selector" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:paddingLeft="5dp"
+                        android:src="@drawable/home_schedule" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="@string/home_schedule" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/home_schedule_unread"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:padding="5dp"
+                    android:text="3未读"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/home_setting"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="2dp"
+                android:layout_weight="7"
+                android:clickable="true"
+                android:background="@drawable/home_setting_selector" >
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:paddingLeft="5dp"
+                    android:src="@drawable/home_setting" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/home_setting" />
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 
-</ScrollView>
+</LinearLayout>

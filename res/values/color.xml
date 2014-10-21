@@ -8,10 +8,6 @@
     <color name="home_purple">#426DE7</color>
     <color name="home_green">#44BA41</color>
     <color name="white">#FFFFFF</color>
-    <color name="smoke_white">#F0F0F0</color>
-    <color name="light_gray">#CCCCCC</color>
-    <color name="dark_gray">#AAAAAA</color>
-    <color name="text_white_color">#FEFEFE</color>
     
     <color name="home_notice_pressed">#27A5BC</color>
     <color name="home_mail_pressed">#0A89F0</color>
@@ -19,12 +15,4 @@
     <color name="home_schedule_pressed">#DB4808</color>
     <color name="home_contact_pressed">#2E5DE5</color>
     <color name="home_setting_pressed">#05B203</color>
-    
-    <color name="splash_bg_blue">#3375E9</color>
-    <color name="login_btn_bg">#59C6FF</color>
-    
-    <color name="black">#000000</color>
-    
-    <color name="exit_btn_red">#F73D3D</color>
-    <color name="light_red">#FA5A5A</color>
 </resources>
